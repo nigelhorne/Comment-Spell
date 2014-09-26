@@ -160,7 +160,7 @@ version 0.001000
 
 C<Comment::Spell> is a work-a-like for Perl Comments similar to C<Pod::Spell>.
 
-It offers no I<Inbuilt> spell checking services, merely streamlines extracting tokens
+It offers no I<in-built> spell checking services, merely streamlines extracting tokens
 to pass to a spell checker of your choice, while removing some basic useful items (stop-words).
 
   # Shorthand for CLI
