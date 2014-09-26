@@ -89,7 +89,7 @@ sub _ppi_string {    ## no critic (Subroutines::RequireArgUnpacking)
 
 sub _skip_comment {
   my ( undef, $comment ) = @_;
-  if ( $comment->content =~ /\A##/msx ) {
+  if ( $comment->content =~ /\A[#]{2}/msx ) {
     return 1;
   }
   return;
