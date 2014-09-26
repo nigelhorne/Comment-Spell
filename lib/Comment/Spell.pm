@@ -96,7 +96,7 @@ sub _skip_comment {
 }
 
 sub _comment_text {
-  my ( $self, $comment ) = @_;
+  my ( undef, $comment ) = @_;
   my $content = $comment->content;
   $content =~ s/\A[#]//msx;
   $content =~ s/\r?\n\z//msx;
@@ -107,9 +107,10 @@ sub _print_words {
   my ( $self, $text ) = @_;
   my $out = $self->stopwords->strip_stopwords($text);
   if ( length $out ) {
-    local $Text::Wrap::huge = 'overflow';
-    $self->_print_output( wrap( '', '', $out ) . "\n\n" );
+    local $Text::Wrap::huge = 'overflow';    ## no critic (Variables::ProhibitPackageVars)
+    $self->_print_output( wrap( q[], q[], $out ) . "\n\n" );
   }
+  return;
 }
 
 sub parse_from_document {
