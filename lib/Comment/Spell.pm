@@ -4,7 +4,7 @@ use warnings;
 
 package Comment::Spell;
 
-our $VERSION = '0.001000';
+our $VERSION = '0.001001';
 
 # ABSTRACT: Spell Checking for your comments
 
