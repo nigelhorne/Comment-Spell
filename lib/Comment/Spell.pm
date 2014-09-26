@@ -195,7 +195,7 @@ to pass to a spell checker of your choice, while removing some basic useful item
 
 =head2 C<output_filehandle>
 
-The filehandle to write to.
+The file handle to write to.
 
 See L</set_output_filehandle>, L</set_output_string> and L</set_output_file>
 
@@ -227,7 +227,7 @@ See L</set_output_filehandle>, L</set_output_string> and L</set_output_file>
 
 =head2 C<parse_from_document>
 
-Lower level interface if you want to make PPI Objects yourself.
+Lower level interface if you want to make C<PPI> Objects yourself.
 
   ->parse_from_document( $ppi_document );
 
