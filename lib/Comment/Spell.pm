@@ -95,10 +95,19 @@ sub _comment_text {
   return $content;
 }
 
+sub _handle_comment_text {
+  my ( $self, $comment_text ) = @_;
+  $self->_print_words( $self->stopwords->strip_stopwords($comment_text) );
+}
+
+sub _handle_comment {
+  my ( $self, $comment ) = @_;
+  return $self->_handle_comment_text( $self->_comment_text($text) );
+}
+
 sub _print_words {
   my ( $self, $text ) = @_;
-  my $out = $self->stopwords->strip_stopwords($text);
-  if ( length $out ) {
+  if ( length $text ) {
     local $Text::Wrap::huge = 'overflow';    ## no critic (Variables::ProhibitPackageVars)
     $self->_print_output( wrap( q[], q[], $out ) . "\n\n" );
   }
@@ -110,7 +119,7 @@ sub parse_from_document {
   my (@comments) = @{ $document->find('PPI::Token::Comment') || [] };
   for my $comment (@comments) {
     next if $self->_skip_comment($comment);
-    $self->_print_words( $self->_comment_text($comment) );
+    $self->_handle_comment($comment);
   }
   $self->_flush_output;
   return;
