@@ -5,12 +5,12 @@ VERSION
     version 0.001000
 
 SYNOPSIS
-    "Comment::Spell" is a workalike for Perl Comments similar to
+    "Comment::Spell" is a work-a-like for Perl Comments similar to
     "Pod::Spell".
 
     It offers no *Inbuilt* spell checking services, merely streamlines
     extracting tokens to pass to a spell checker of your choice, while
-    removing some basic useful items (stopwords).
+    removing some basic useful items (stop-words).
 
       # Shorthand for CLI
       perl -MComment::Spell -e 'Comment::Spell->new->parse_from_file(q[Foo.pm])' | spell -a

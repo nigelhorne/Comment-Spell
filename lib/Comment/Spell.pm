@@ -158,10 +158,10 @@ version 0.001000
 
 =head1 SYNOPSIS
 
-C<Comment::Spell> is a workalike for Perl Comments similar to C<Pod::Spell>.
+C<Comment::Spell> is a work-a-like for Perl Comments similar to C<Pod::Spell>.
 
 It offers no I<Inbuilt> spell checking services, merely streamlines extracting tokens
-to pass to a spell checker of your choice, while removing some basic useful items (stopwords).
+to pass to a spell checker of your choice, while removing some basic useful items (stop-words).
 
   # Shorthand for CLI
   perl -MComment::Spell -e 'Comment::Spell->new->parse_from_file(q[Foo.pm])' | spell -a
