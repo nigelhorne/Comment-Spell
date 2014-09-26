@@ -1,0 +1,45 @@
+NAME
+    Comment::Spell - Spell Checking for your comments
+
+VERSION
+    version 0.001000
+
+SYNOPSIS
+    "Comment::Spell" is a workalike for Perl Comments similar to
+    "Pod::Spell".
+
+    It offers no *Inbuilt* spell checking services, merely streamlines
+    extracting tokens to pass to a spell checker of your choice, while
+    removing some basic useful items (stopwords).
+
+      # Shorthand for CLI
+      perl -MComment::Spell -e 'Comment::Spell->new->parse_from_file(q[Foo.pm])' | spell -a
+
+      # Advanced Usage:
+
+      my $speller = Comment::Spell->new();
+
+      $speller->parse_from_file(q[Foo.pm]); # streams words to spell to STDOUT by default
+
+      $speller->parse_from_filehandle( $myfh ); # again to STDOUT
+
+      $speller->set_output_file('out.txt');
+
+      $speller->parse_from_file(q[Foo.pm]); # Now writes to out.txt
+
+      my $str;
+
+      $speller->set_output_string($str);
+
+      $speller->parse_from_file(q[Foo.pm]); # Now writes to $str
+
+AUTHOR
+    Kent Fredric <kentnl@cpan.org>
+
+COPYRIGHT AND LICENSE
+    This software is copyright (c) 2014 by Kent Fredric
+    <kentfredric@gmail.com>.
+
+    This is free software; you can redistribute it and/or modify it under
+    the same terms as the Perl 5 programming language system itself.
+
