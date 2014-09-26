@@ -10,7 +10,7 @@ our $VERSION = '0.001000';
 
 our $AUTHORITY = 'cpan:KENTNL'; # AUTHORITY
 
-use Moo;
+use Moo qw( has );
 use Pod::Wordlist;
 use PPI;
 use Path::Tiny qw( path );
@@ -48,7 +48,8 @@ sub _build__is_debug {
 }
 
 sub _build_stopwords {
-  return Pod::Wordlist->new( _is_debug => $_[0]->_is_debug, );
+  my ( $self ) = @_;
+  return Pod::Wordlist->new( _is_debug => $self->_is_debug, );
 }
 
 sub _build_output_filehandle {
