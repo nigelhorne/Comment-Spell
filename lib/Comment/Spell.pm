@@ -184,6 +184,53 @@ to pass to a spell checker of your choice, while removing some basic useful item
 
   $speller->parse_from_file(q[Foo.pm]); # Now writes to $str
 
+=head1 METHODS
+
+=head2 C<new>
+
+  ->new( 
+    stopwords         => A Pod::Wordlist instance
+    output_filehandle => A IO Handle ( default is STDOUT )
+  )
+
+=head2 C<output_filehandle>
+
+The filehandle to write to.
+
+See L</set_output_filehandle>, L</set_output_string> and L</set_output_file>
+
+=head2 C<set_output_filehandle>
+
+  ->set_output_filehandle( $fh );
+  ->set_output_filehandle( \*STDOUT );
+
+=head2 C<set_output_string>
+
+  my $str;
+  ->set_output_string( $str ); # will write to $str 
+
+=head2 C<set_output_file>
+
+  ->set_output_file('./out.txt');
+
+=head2 C<parse_from_file>
+
+  ->parse_from_file('./in.pm'); # Read in.pm and stream tokens to current FH
+
+=head2 C<parse_from_filehandle>
+
+  ->parse_from_filehandle( $fh ); # Slurps FH and streams its tokens to current FH
+
+=head2 C<parse_from_string>
+
+  ->parse_from_string( $string ); # decode $string as a PPI document and stream its comments tokens to FH
+
+=head2 C<parse_from_document>
+
+Lower level interface if you want to make PPI Objects yourself.
+
+  ->parse_from_document( $ppi_document );
+
 =head1 AUTHOR
 
 Kent Fredric <kentnl@cpan.org>
