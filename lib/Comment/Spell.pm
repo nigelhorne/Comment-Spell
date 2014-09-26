@@ -21,8 +21,6 @@ use Text::Wrap qw( wrap );
 # this comment is for self testing
 ## this comment is hidden for self testing
 
-has _is_debug => ( init_arg => 'debug', is => ro =>, lazy => 1, builder => '_build__is_debug' );
-
 has stopwords => (
   is      => 'rw',
   lazy    => 1,
@@ -43,14 +41,8 @@ has output_filehandle => (
   },
 );
 
-sub _build__is_debug {
-  return 1 if $ENV{PERL_COMMENT_SPELL_DEBUG};
-  return;
-}
-
 sub _build_stopwords {
-  my ($self) = @_;
-  return Pod::Wordlist->new( _is_debug => $self->_is_debug, );
+  return Pod::Wordlist->new();
 }
 
 sub _build_output_filehandle {
