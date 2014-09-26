@@ -20,6 +20,7 @@ my %WriteMakefileArgs = (
   "LICENSE" => "perl",
   "NAME" => "Comment::Spell",
   "PREREQ_PM" => {
+    "Carp" => 0,
     "IO::Handle" => 0,
     "Moo" => 0,
     "PPI" => 0,
@@ -42,6 +43,7 @@ my %WriteMakefileArgs = (
 
 
 my %FallbackPrereqs = (
+  "Carp" => 0,
   "ExtUtils::MakeMaker" => 0,
   "File::Spec" => 0,
   "IO::Handle" => 0,

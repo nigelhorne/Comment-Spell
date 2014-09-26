@@ -10,6 +10,7 @@ our $VERSION = '0.001000';
 
 our $AUTHORITY = 'cpan:KENTNL'; # AUTHORITY
 
+use Carp qw( croak );
 use Moo qw( has );
 use Pod::Wordlist;
 use PPI;
@@ -48,7 +49,7 @@ sub _build__is_debug {
 }
 
 sub _build_stopwords {
-  my ( $self ) = @_;
+  my ($self) = @_;
   return Pod::Wordlist->new( _is_debug => $self->_is_debug, );
 }
 
@@ -62,13 +63,13 @@ sub set_output_file {
   return;
 }
 
-sub set_output_string {
-  open my $fh, '>', \$_[1];
+sub set_output_string {    ## no critic (Subroutines::RequireArgUnpacking, InputOutput::RequireBriefOpen)
+  open my $fh, '>', \$_[1] or croak 'Cant construct a scalar filehandle';
   $_[0]->set_output_filehandle($fh);
 }
 
 sub _ppi_fh {
-  my ( $self, $fh ) = @_;
+  my ( undef, $fh ) = @_;
   my $content = do {
     local $/ = undef;
     scalar <$fh>;
@@ -77,11 +78,11 @@ sub _ppi_fh {
 }
 
 sub _ppi_file {
-  my ( $self, $file ) = @_;
+  my ( undef, $file ) = @_;
   return PPI::Document->new( $file, readonly => 1 );
 }
 
-sub _ppi_string {
+sub _ppi_string {    ## no critic (Subroutines::RequireArgUnpacking)
   return PPI::Document->new( \$_[1], readonly => 1 );
 }
 

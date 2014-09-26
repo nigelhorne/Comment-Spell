@@ -67,6 +67,7 @@ do { my $x = {
                     },
        'runtime' => {
                       'requires' => {
+                                      'Carp' => '0',
                                       'IO::Handle' => '0',
                                       'Moo' => '0',
                                       'PPI' => '0',
