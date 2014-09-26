@@ -42,7 +42,6 @@ has output_filehandle => (
 );
 
 sub _build_stopwords {
-  my ($self) = @_;
   return Pod::Wordlist->new();
 }
 
