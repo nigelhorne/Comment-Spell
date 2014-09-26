@@ -66,6 +66,7 @@ sub set_output_file {
 sub set_output_string {    ## no critic (Subroutines::RequireArgUnpacking, InputOutput::RequireBriefOpen)
   open my $fh, '>', \$_[1] or croak 'Cant construct a scalar filehandle';
   $_[0]->set_output_filehandle($fh);
+  return;
 }
 
 sub _ppi_fh {
