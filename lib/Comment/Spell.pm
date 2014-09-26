@@ -109,7 +109,7 @@ sub _print_words {
   my ( $self, $text ) = @_;
   if ( length $text ) {
     local $Text::Wrap::huge = 'overflow';    ## no critic (Variables::ProhibitPackageVars)
-    $self->_print_output( wrap( q[], q[], $out ) . "\n\n" );
+    $self->_print_output( wrap( q[], q[], $text ) . "\n\n" );
   }
   return;
 }
