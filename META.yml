@@ -30,11 +30,16 @@ requires:
   perl: '5.008'
   strict: '0'
   warnings: '0'
+resources:
+  bugtracker: https://github.com/kentnl/Comment-Spell/issues
+  homepage: https://github.com/kentnl/Comment-Spell
+  repository: https://github.com/kentnl/Comment-Spell.git
 version: '0.001000'
 x_BuiltWith:
   modules:
     CPAN::Meta: '2.142060'
     Carp: '1.34'
+    Dist::Zilla::App::Command::bakeini: '0.001002'
     Dist::Zilla::Plugin::Author::KENTNL::RecommendFixes: '0.003004'
     Dist::Zilla::Plugin::Authority: '1.006'
     Dist::Zilla::Plugin::AutoPrereqs: '5.020'
@@ -80,7 +85,6 @@ x_BuiltWith:
     Dist::Zilla::Plugin::Twitter: '0.025'
     Dist::Zilla::Plugin::UploadToCPAN: '5.020'
     Dist::Zilla::PluginBundle::Author::KENTNL: '2.020003'
-    Dist::Zilla::PluginBundle::Author::KENTNL::Lite: '2.001000'
     ExtUtils::MakeMaker: '6.98'
     File::Spec: '3.49'
     IO::Handle: '1.35'
@@ -352,14 +356,6 @@ x_Dist_Zilla:
       name: '@Author::KENTNL/BundleDevelSuggests'
       version: '5.020'
     -
-      class: Dist::Zilla::Plugin::Prereqs
-      config:
-        Dist::Zilla::Plugin::Prereqs:
-          phase: develop
-          type: requires
-      name: '@Author::KENTNL/BundleDevelRequires'
-      version: '5.020'
-    -
       class: Dist::Zilla::Plugin::MinimumPerl
       name: '@Author::KENTNL/MinimumPerl'
       version: '1.003'
@@ -471,7 +467,7 @@ x_Dist_Zilla:
             - dist.ini
             - Changes
           allow_dirty_match:
-            - (?^:^lib/)
+            - (?^u:^lib/)
           changelog: Changes
         Dist::Zilla::Role::Git::Repo:
           repo_root: .
@@ -541,11 +537,12 @@ x_Dist_Zilla:
       config:
         Dist::Zilla::Plugin::Prereqs::Recommend::MatchInstalled:
           applyto_map:
-            - 'develop.requires = develop.requires'
+            - 'develop.suggests = develop.suggests'
           applyto_phase:
             - develop
           modules:
             - Dist::Zilla::PluginBundle::Author::KENTNL
+            - Dist::Zilla::App::Command::bakeini
           source_relation: requires
           target_relation: recommends
       name: '@Author::KENTNL/always_latest_develop_bundle'
