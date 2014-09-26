@@ -121,6 +121,7 @@ sub parse_from_document {
     $self->_print_words( $self->_comment_text($comment) );
   }
   $self->_flush_output;
+  return;
 }
 
 sub parse_from_filehandle {
@@ -133,7 +134,7 @@ sub parse_from_file {
   return $self->parse_from_document( $self->_ppi_file($infile) );
 }
 
-sub parse_from_string {
+sub parse_from_string {    ## no critic (Subroutines::RequireArgUnpacking)
   return $_[0]->parse_from_document( $_[0]->_ppi_string( $_[1] ) );
 }
 
