@@ -97,7 +97,7 @@ sub _comment_text {
 
 sub _handle_comment_text {
   my ( $self, $comment_text ) = @_;
-  $self->_print_words( $self->stopwords->strip_stopwords($comment_text) );
+  return $self->_print_words( $self->stopwords->strip_stopwords($comment_text) );
 }
 
 sub _handle_comment {
