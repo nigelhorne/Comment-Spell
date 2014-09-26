@@ -188,7 +188,7 @@ to pass to a spell checker of your choice, while removing some basic useful item
 
 =head2 C<new>
 
-  ->new( 
+  ->new(
     stopwords         => A Pod::Wordlist instance
     output_filehandle => A IO Handle ( default is STDOUT )
   )

@@ -35,7 +35,7 @@ SYNOPSIS
 
 METHODS
   "new"
-      ->new( 
+      ->new(
         stopwords         => A Pod::Wordlist instance
         output_filehandle => A IO Handle ( default is STDOUT )
       )
