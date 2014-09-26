@@ -4,7 +4,7 @@ Comment::Spell - Spell Checking for your comments
 
 # VERSION
 
-version 0.001000
+version 0.001001
 
 # SYNOPSIS
 
