@@ -102,7 +102,7 @@ sub _handle_comment_text {
 
 sub _handle_comment {
   my ( $self, $comment ) = @_;
-  return $self->_handle_comment_text( $self->_comment_text($text) );
+  return $self->_handle_comment_text( $self->_comment_text($comment) );
 }
 
 sub _print_words {
