@@ -207,7 +207,7 @@ See L</set_output_filehandle>, L</set_output_string> and L</set_output_file>
 =head2 C<set_output_string>
 
   my $str;
-  ->set_output_string( $str ); # will write to $str 
+  ->set_output_string( $str ); # will write to $str
 
 =head2 C<set_output_file>
 
