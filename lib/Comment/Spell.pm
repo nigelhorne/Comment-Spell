@@ -1,4 +1,4 @@
-use 5.008; ## open scalar
+use 5.008;    # open scalar
 use strict;
 use warnings;
 
@@ -63,8 +63,8 @@ sub set_output_file {
   return;
 }
 
-sub set_output_string {    ## no critic (Subroutines::RequireArgUnpacking, InputOutput::RequireBriefOpen)
-  open my $fh, '>', \$_[1] or croak 'Cant construct a scalar filehandle';
+sub set_output_string {    ## no critic (Subroutines::RequireArgUnpacking)
+  open my $fh, '>', \$_[1] or croak 'Cant construct a scalar filehandle';    ## no critic ( InputOutput::RequireBriefOpen )
   $_[0]->set_output_filehandle($fh);
   return;
 }
