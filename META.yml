@@ -18,7 +18,7 @@ name: Comment-Spell
 provides:
   Comment::Spell:
     file: lib/Comment/Spell.pm
-    version: '0.001000'
+    version: '0.001001'
 requires:
   Carp: '0'
   IO::Handle: '0'
@@ -34,7 +34,7 @@ resources:
   bugtracker: https://github.com/kentnl/Comment-Spell/issues
   homepage: https://github.com/kentnl/Comment-Spell
   repository: https://github.com/kentnl/Comment-Spell.git
-version: '0.001000'
+version: '0.001001'
 x_BuiltWith:
   modules:
     CPAN::Meta: '2.142060'
@@ -439,7 +439,7 @@ x_Dist_Zilla:
         Dist::Zilla::Plugin::Git::Tag:
           branch: ~
           signed: '0'
-          tag: 0.001000-source
+          tag: 0.001001-source
           tag_format: '%v-source'
           tag_message: v%v
           time_zone: local
@@ -493,7 +493,7 @@ x_Dist_Zilla:
         Dist::Zilla::Plugin::Git::Tag:
           branch: releases
           signed: '0'
-          tag: '0.001000'
+          tag: '0.001001'
           tag_format: '%v'
           tag_message: v%v
           time_zone: local
