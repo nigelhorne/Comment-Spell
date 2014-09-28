@@ -4,7 +4,7 @@ use warnings;
 
 package Comment::Spell;
 
-our $VERSION = '0.001000';
+our $VERSION = '0.001001';
 
 # ABSTRACT: Spell Checking for your comments
 
@@ -12,7 +12,7 @@ our $AUTHORITY = 'cpan:KENTNL'; # AUTHORITY
 
 use Carp qw( croak );
 use Moo qw( has );
-use Pod::Wordlist;
+use Pod::Wordlist 1.07;
 use PPI;
 use Path::Tiny qw( path );
 use IO::Handle;
@@ -155,7 +155,7 @@ Comment::Spell - Spell Checking for your comments
 
 =head1 VERSION
 
-version 0.001000
+version 0.001001
 
 =head1 SYNOPSIS
 

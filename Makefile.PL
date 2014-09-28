@@ -25,7 +25,7 @@ my %WriteMakefileArgs = (
     "Moo" => 0,
     "PPI" => 0,
     "Path::Tiny" => 0,
-    "Pod::Wordlist" => 0,
+    "Pod::Wordlist" => "1.07",
     "Text::Wrap" => 0,
     "strict" => 0,
     "warnings" => 0
@@ -35,7 +35,7 @@ my %WriteMakefileArgs = (
     "File::Spec" => 0,
     "Test::More" => "0.89"
   },
-  "VERSION" => "0.001000",
+  "VERSION" => "0.001001",
   "test" => {
     "TESTS" => "t/*.t t/00-compile/*.t"
   }
@@ -50,7 +50,7 @@ my %FallbackPrereqs = (
   "Moo" => 0,
   "PPI" => 0,
   "Path::Tiny" => 0,
-  "Pod::Wordlist" => 0,
+  "Pod::Wordlist" => "1.07",
   "Test::More" => "0.89",
   "Text::Wrap" => 0,
   "strict" => 0,
