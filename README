@@ -2,7 +2,7 @@ NAME
     Comment::Spell - Spell Checking for your comments
 
 VERSION
-    version 0.001001
+    version 0.001002
 
 SYNOPSIS
     "Comment::Spell" is a work-a-like for Perl Comments similar to

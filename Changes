@@ -1,5 +1,7 @@
 Release history for Comment-Spell
 
+0.001002 2014-09-28T04:37:03Z
+
 0.001001 2014-09-28T04:36:41Z
  [Bugfix]
  - Require newer version of Pod::Wordlist
