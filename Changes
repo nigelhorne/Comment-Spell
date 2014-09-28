@@ -1,6 +1,12 @@
 Release history for Comment-Spell
 
 {{$NEXT}}
+ [Bugfix]
+ - Require newer version of Pod::Wordlist
+
+ [Dependencies::Stats]
+ - Dependencies changed since 0.001000, see misc/*.deps* for details
+ - runtime: ↑1
 
 0.001000 2014-09-26T02:46:34Z
  - First version.
