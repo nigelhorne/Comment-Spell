@@ -1,10 +1,14 @@
 Release history for Comment-Spell
 
 {{$NEXT}}
+ [Compatibility]
+ - Attempt to support 5.6 ( untested, dependenices may require newer )
+
  [Dependencies::Stats]
  - Dependencies changed since 0.001001, see misc/*.deps* for details
  - configure: +1 (recommends: ↑1)
  - develop: +5 ↑2 -2 (recommends: +1, suggests: ↑2)
+ - runtime: +1 ↓1
  - test: +1 (recommends: ↑2)
 
 0.001001 2014-09-28T04:36:41Z

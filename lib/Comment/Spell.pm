@@ -1,4 +1,4 @@
-use 5.008;    # open scalar
+use 5.006;
 use strict;
 use warnings;
 
@@ -16,6 +16,7 @@ use Pod::Wordlist 1.07;
 use PPI;
 use Path::Tiny qw( path );
 use IO::Handle;
+use IO::Scalar;
 use Text::Wrap qw( wrap );
 
 # this comment is for self testing
@@ -56,7 +57,7 @@ sub set_output_file {
 }
 
 sub set_output_string {    ## no critic (Subroutines::RequireArgUnpacking)
-  open my $fh, '>', \$_[1] or croak 'Cant construct a scalar filehandle';    ## no critic ( InputOutput::RequireBriefOpen )
+  my $fh = IO::Scalar->new( \$_[1] );
   $_[0]->set_output_filehandle($fh);
   return;
 }
