@@ -1,6 +1,6 @@
 Release history for Comment-Spell
 
-0.001002 2017-03-08T15:48:58Z 38f97ce
+0.001002 2017-03-08T15:50:05Z be9836d
  - Bugfix: Avoid test failures with -Ddefault_inc_excludes_dot
 
  [Dependencies::Stats]

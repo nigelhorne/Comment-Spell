@@ -41,6 +41,8 @@ has output_filehandle => (
   },
 );
 
+no Moo;
+
 sub _build_stopwords {
   return Pod::Wordlist->new();
 }
@@ -138,8 +140,6 @@ sub parse_from_file {
 sub parse_from_string {    ## no critic (Subroutines::RequireArgUnpacking)
   return $_[0]->parse_from_document( $_[0]->_ppi_string( $_[1] ) );
 }
-
-no Moo;
 
 1;
 
