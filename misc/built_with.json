@@ -57,6 +57,7 @@
       "ExtUtils::MakeMaker" : "7.24",
       "File::Spec" : "3.66",
       "IO::Handle" : "1.36",
+      "IO::Scalar" : "2.111",
       "Moo" : "2.003000",
       "PPI" : "1.220",
       "Path::Tiny" : "0.104",

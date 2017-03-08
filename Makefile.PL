@@ -2,7 +2,7 @@
 use strict;
 use warnings;
 
-use 5.008;
+use 5.006;
 
 use ExtUtils::MakeMaker;
 
@@ -14,11 +14,12 @@ my %WriteMakefileArgs = (
   },
   "DISTNAME" => "Comment-Spell",
   "LICENSE" => "perl",
-  "MIN_PERL_VERSION" => "5.008",
+  "MIN_PERL_VERSION" => "5.006",
   "NAME" => "Comment::Spell",
   "PREREQ_PM" => {
     "Carp" => 0,
     "IO::Handle" => 0,
+    "IO::Scalar" => 0,
     "Moo" => 0,
     "PPI" => 0,
     "Path::Tiny" => 0,
@@ -44,6 +45,7 @@ my %FallbackPrereqs = (
   "ExtUtils::MakeMaker" => 0,
   "File::Spec" => 0,
   "IO::Handle" => 0,
+  "IO::Scalar" => 0,
   "Moo" => 0,
   "PPI" => 0,
   "Path::Tiny" => 0,

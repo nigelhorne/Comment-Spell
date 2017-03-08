@@ -2,10 +2,16 @@ This file contains changes in REQUIRED dependencies for standard CPAN phases (co
 
 0.001002
  [Added / configure requires]
- - perl 5.008
+ - perl 5.006
+
+ [Added / runtime requires]
+ - IO::Scalar
 
  [Added / test requires]
- - perl 5.008
+ - perl 5.006
+
+ [Changed / runtime requires]
+ - perl 5.008 → 5.006
 
  [Changed / test requires]
  - Test::More 0.89 → 0
