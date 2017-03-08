@@ -20,7 +20,7 @@ name: Comment-Spell
 provides:
   Comment::Spell:
     file: lib/Comment/Spell.pm
-    version: '0.001002'
+    version: '0.001003'
 recommends:
   Moo: '1.000008'
   Path::Tiny: '0.058'
@@ -40,4 +40,4 @@ resources:
   bugtracker: https://github.com/kentnl/Comment-Spell/issues
   homepage: https://github.com/kentnl/Comment-Spell
   repository: https://github.com/kentnl/Comment-Spell.git
-version: '0.001002'
+version: '0.001003'
