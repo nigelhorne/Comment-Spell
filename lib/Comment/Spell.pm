@@ -44,26 +44,32 @@ has output_filehandle => (
 
 no Moo;
 
+# Default loader for the stopword list
 sub _build_stopwords {
   return Pod::Wordlist->new();
 }
 
+# Default output is STDOUT
 sub _build_output_filehandle {
   return \*STDOUT;
 }
 
+# ->set_output_file( "path/to/file" )
 sub set_output_file {
   my ( $self, $filename ) = @_;
   $self->set_output_filehandle( path($filename)->openw_raw );
   return;
 }
 
+# ->set_output_string( my $str );
 sub set_output_string {    ## no critic (Subroutines::RequireArgUnpacking)
   my $fh = IO::Scalar->new( \$_[1] );
   $_[0]->set_output_filehandle($fh);
   return;
 }
 
+# Returns a PPI Document for a filehandle
+# ->_ppi_fh( $filehandle )
 sub _ppi_fh {
   my ( undef, $fh ) = @_;
   my $content = do {
@@ -73,23 +79,30 @@ sub _ppi_fh {
   return PPI::Document->new( \$content, readonly => 1 );
 }
 
+# Returns a PPI Document for a file name
+# ->_ppi_file( $filename )
 sub _ppi_file {
   my ( undef, $file ) = @_;
   return PPI::Document->new( $file, readonly => 1 );
 }
 
+# Returns a PPI Document for a scalar
+# ->_ppi_string( $source_code )
 sub _ppi_string {    ## no critic (Subroutines::RequireArgUnpacking)
   return PPI::Document->new( \$_[1], readonly => 1 );
 }
 
+# Determines if a PPI::Token::Comment should be skipped.
+# Presently this skips directive comments, which by default have two # marks leading them
+# if ( ->_skip_comment( PPI::Token::Comment ) )
 sub _skip_comment {
   my ( undef, $comment ) = @_;
-  if ( $comment->content =~ /\A[#]{2}/msx ) {
-    return 1;
-  }
-  return;
+  return scalar $comment->content =~ /\A[#]{2}/msx;
 }
 
+# Extract comment text from a PPI::Token::Comment
+# Returns comments with leading # removed and trailing \n  or \r\n removed.
+# my $txt = ->_comment_text( PPI::Token::Comment )
 sub _comment_text {
   my ( undef, $comment ) = @_;
   my $content = $comment->content;
@@ -98,25 +111,36 @@ sub _comment_text {
   return $content;
 }
 
+# Primary target for "this is the text of a comment we want"
+# strips stopwords from the comments, and then prints them to the output target
+# ->_handle_comment_text( $text_string );
 sub _handle_comment_text {
   my ( $self, $comment_text ) = @_;
   return $self->_print_words( $self->stopwords->strip_stopwords($comment_text) );
 }
 
+# Primary target for "This is a PPI::Token::Comment we want"
+# Extracts the content and ferrys it to the output target via _handle_comment_text
+# ->_handle_comment( PPI::Token::Comment )
 sub _handle_comment {
   my ( $self, $comment ) = @_;
   return $self->_handle_comment_text( $self->_comment_text($comment) );
 }
 
+# Print a text to the output target wrapped
+# Overflows instead of snapping words.
+# ->_print_words( $text )
 sub _print_words {
   my ( $self, $text ) = @_;
-  if ( length $text ) {
-    local $Text::Wrap::huge = 'overflow';    ## no critic (Variables::ProhibitPackageVars)
-    $self->_print_output( wrap( q[], q[], $text ) . "\n\n" );
-  }
-  return;
+  return unless length $text;
+
+  local $Text::Wrap::huge = 'overflow';    ## no critic (Variables::ProhibitPackageVars)
+  return $self->_print_output( wrap( q[], q[], $text ) . "\n\n" );
 }
 
+# Scan a PPI::Document for Comments, feeding
+# only the comments to the output target.
+# ->parse_from_document( PPI::Document )
 sub parse_from_document {
   my ( $self, $document ) = @_;
   my (@comments) = @{ $document->find('PPI::Token::Comment') || [] };
@@ -128,16 +152,22 @@ sub parse_from_document {
   return;
 }
 
+# Load a PPI::Document from a filehandle and process it for comments
+# ->parse_from_filehandle( $fh );
 sub parse_from_filehandle {
   my ( $self, $infh ) = @_;
   return $self->parse_from_document( $self->_ppi_fh($infh) );
 }
 
+# Load a PPI::Document from a file and process it for comments
+# ->parse_from_file( $filename )
 sub parse_from_file {
   my ( $self, $infile ) = @_;
   return $self->parse_from_document( $self->_ppi_file($infile) );
 }
 
+# Load a PPI::Document from a string, and process it for comments
+# ->parse_from_string( "A String" )
 sub parse_from_string {    ## no critic (Subroutines::RequireArgUnpacking)
   return $_[0]->parse_from_document( $_[0]->_ppi_string( $_[1] ) );
 }
