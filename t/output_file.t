@@ -2,7 +2,7 @@
 use strict;
 use warnings;
 
-use Test::More;
+use Test::More tests => 4;
 
 # FILENAME: basic.t
 # CREATED: 09/26/14 12:37:44 by Kent Fredric (kentnl) <kentfredric@gmail.com>
@@ -31,5 +31,3 @@ like $outstr,   qr/Single Hashed comment/,                   "Single Hashed comm
 unlike $outstr, qr/Double Hashed comment/,                   "Double Hashed comment excluided";
 like $outstr,   qr/this comment is for self testing/,        "Single Hashed comment extracted in main pmfile";
 unlike $outstr, qr/this comment is hidden for self testing/, "Double Hashed comment excluded in main pmfile";
-
-done_testing;
