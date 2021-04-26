@@ -4,6 +4,16 @@ use warnings;
 
 package Comment::Spell;
 
+=head1 NAME
+
+Comment::Spell  - Spell Checking for your comments
+
+=head1 VERSION
+
+0.001003
+
+=cut
+
 our $VERSION = '0.001003';
 
 # ABSTRACT: Spell Checking for your comments
@@ -172,8 +182,6 @@ sub parse_from_string {    ## no critic (Subroutines::RequireArgUnpacking)
   return $_[0]->parse_from_document( $_[0]->_ppi_string( $_[1] ) );
 }
 
-1;
-
 =head1 SYNOPSIS
 
 C<Comment::Spell> is a work-a-like for Perl Comments similar to C<Pod::Spell>.
@@ -250,3 +258,46 @@ Lower level interface if you want to make C<PPI> Objects yourself.
 
   ->parse_from_document( $ppi_document );
 
+=head1 SUPPORT
+
+You can find documentation for this module with the perldoc command.
+
+    perldoc Comment::Spell
+
+You can also look for information at:
+
+=over 4
+
+=item * MetaCPAN
+
+L<https://metacpan.org/release/Comment-Spell>
+
+=item * RT: CPAN's request tracker
+
+L<https://rt.cpan.org/NoAuth/Bugs.html?Dist=Comment-Spell>
+
+=item * CPANTS
+
+L<http://cpants.cpanauthors.org/dist/Comment-Spell>
+
+=item * CPAN Testers' Matrix
+
+L<http://matrix.cpantesters.org/?dist=Comment-Spell>
+
+=item * CPAN Ratings
+
+L<http://cpanratings.perl.org/d/Comment-Spell>
+
+=item * CPAN Testers Dependencies
+
+L<http://deps.cpantesters.org/?module=Comment::Spell>
+
+=back
+
+=head1 LICENSE AND COPYRIGHT
+
+This program is released under the following licence: GPL2
+
+=cut
+
+1;
