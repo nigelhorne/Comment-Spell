@@ -1,8 +1,16 @@
+package Comment::Spell;
+
 use 5.006;
 use strict;
 use warnings;
-
-package Comment::Spell;
+use Carp qw( croak );
+use Moo qw( has );
+use Pod::Wordlist 1.07;
+use PPI;
+use Path::Tiny qw( path );
+use IO::Handle;
+use IO::Scalar;
+use Text::Wrap qw( wrap );
 
 =head1 NAME
 
@@ -16,18 +24,9 @@ Comment::Spell  - Spell Checking for your comments
 
 our $VERSION = '0.001003';
 
-# ABSTRACT: Spell Checking for your comments
+=head1 SUBROUTINES/METHODS
 
-# AUTHORITY
-
-use Carp qw( croak );
-use Moo qw( has );
-use Pod::Wordlist 1.07;
-use PPI;
-use Path::Tiny qw( path );
-use IO::Handle;
-use IO::Scalar;
-use Text::Wrap qw( wrap );
+=cut
 
 # this comment is for self testing
 ## this comment is hidden for self testing
@@ -169,7 +168,12 @@ sub parse_from_filehandle {
   return $self->parse_from_document( $self->_ppi_fh($infh) );
 }
 
-# Load a PPI::Document from a file and process it for comments
+=head2 parse_from_file
+
+Load a PPI::Document from a file and process it for comments
+
+=cut
+
 # ->parse_from_file( $filename )
 sub parse_from_file {
   my ( $self, $infile ) = @_;
@@ -294,9 +298,18 @@ L<http://deps.cpantesters.org/?module=Comment::Spell>
 
 =back
 
+=head1 AUTHOR
+
+Kent Fredric C<< <kentnl@cpan.org> >>
+
+Maintained by Nigel Horne, C<< <njh at bandsman.co.uk> >>
+
 =head1 LICENSE AND COPYRIGHT
 
-This program is released under the following licence: GPL2
+This software is copyright (c) 2017-2021 by Kent Fredric <kentfredric@gmail.com>.
+
+This is free software; you can redistribute it and/or modify it under
+the same terms as the Perl 5 programming language system itself.
 
 =cut
 
