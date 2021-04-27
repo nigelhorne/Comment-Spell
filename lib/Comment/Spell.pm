@@ -24,6 +24,82 @@ Comment::Spell  - Spell Checking for your comments
 
 our $VERSION = '0.001003';
 
+=head1 SYNOPSIS
+
+C<Comment::Spell> is a work-a-like for Perl Comments similar to C<Pod::Spell>.
+
+It offers no I<in-built> spell checking services, merely streamlines extracting tokens
+to pass to a spell checker of your choice, while removing some basic useful items (stop-words).
+
+It also, by default, ignores comments with two or more leading hashes so to avoid directive comments
+like those found in C<Perl::Critic>
+
+  # Shorthand for CLI
+  perl -MComment::Spell -e 'Comment::Spell->new->parse_from_file(q[Foo.pm])' | spell -a
+
+  # Advanced Usage:
+
+  my $speller = Comment::Spell->new();
+
+  $speller->parse_from_file(q[Foo.pm]); # streams words to spell to STDOUT by default
+
+  $speller->parse_from_filehandle( $myfh ); # again to STDOUT
+
+  $speller->set_output_file('out.txt');
+
+  $speller->parse_from_file(q[Foo.pm]); # Now writes to out.txt
+
+  my $str;
+
+  $speller->set_output_string($str);
+
+  $speller->parse_from_file(q[Foo.pm]); # Now writes to $str
+
+=method C<new>
+
+  ->new(
+    stopwords         => A Pod::Wordlist instance
+    output_filehandle => A IO Handle ( default is STDOUT )
+  )
+
+=method C<output_filehandle>
+
+The file handle to write to.
+
+See L</set_output_filehandle>, L</set_output_string> and L</set_output_file>
+
+=method C<set_output_filehandle>
+
+  ->set_output_filehandle( $fh );
+  ->set_output_filehandle( \*STDOUT );
+
+=method C<set_output_string>
+
+  my $str;
+  ->set_output_string( $str ); # will write to $str
+
+=method C<set_output_file>
+
+  ->set_output_file('./out.txt');
+
+=method C<parse_from_file>
+
+  ->parse_from_file('./in.pm'); # Read in.pm and stream tokens to current FH
+
+=method C<parse_from_filehandle>
+
+  ->parse_from_filehandle( $fh ); # Slurps FH and streams its tokens to current FH
+
+=method C<parse_from_string>
+
+  ->parse_from_string( $string ); # decode $string as a PPI document and stream its comments tokens to FH
+
+=method C<parse_from_document>
+
+Lower level interface if you want to make C<PPI> Objects yourself.
+
+  ->parse_from_document( $ppi_document );
+
 =head1 SUBROUTINES/METHODS
 
 =cut
@@ -185,82 +261,6 @@ sub parse_from_file {
 sub parse_from_string {    ## no critic (Subroutines::RequireArgUnpacking)
   return $_[0]->parse_from_document( $_[0]->_ppi_string( $_[1] ) );
 }
-
-=head1 SYNOPSIS
-
-C<Comment::Spell> is a work-a-like for Perl Comments similar to C<Pod::Spell>.
-
-It offers no I<in-built> spell checking services, merely streamlines extracting tokens
-to pass to a spell checker of your choice, while removing some basic useful items (stop-words).
-
-It also, by default, ignores comments with two or more leading hashes so to avoid directive comments
-like those found in C<Perl::Critic>
-
-  # Shorthand for CLI
-  perl -MComment::Spell -e 'Comment::Spell->new->parse_from_file(q[Foo.pm])' | spell -a
-
-  # Advanced Usage:
-
-  my $speller = Comment::Spell->new();
-
-  $speller->parse_from_file(q[Foo.pm]); # streams words to spell to STDOUT by default
-
-  $speller->parse_from_filehandle( $myfh ); # again to STDOUT
-
-  $speller->set_output_file('out.txt');
-
-  $speller->parse_from_file(q[Foo.pm]); # Now writes to out.txt
-
-  my $str;
-
-  $speller->set_output_string($str);
-
-  $speller->parse_from_file(q[Foo.pm]); # Now writes to $str
-
-=method C<new>
-
-  ->new(
-    stopwords         => A Pod::Wordlist instance
-    output_filehandle => A IO Handle ( default is STDOUT )
-  )
-
-=method C<output_filehandle>
-
-The file handle to write to.
-
-See L</set_output_filehandle>, L</set_output_string> and L</set_output_file>
-
-=method C<set_output_filehandle>
-
-  ->set_output_filehandle( $fh );
-  ->set_output_filehandle( \*STDOUT );
-
-=method C<set_output_string>
-
-  my $str;
-  ->set_output_string( $str ); # will write to $str
-
-=method C<set_output_file>
-
-  ->set_output_file('./out.txt');
-
-=method C<parse_from_file>
-
-  ->parse_from_file('./in.pm'); # Read in.pm and stream tokens to current FH
-
-=method C<parse_from_filehandle>
-
-  ->parse_from_filehandle( $fh ); # Slurps FH and streams its tokens to current FH
-
-=method C<parse_from_string>
-
-  ->parse_from_string( $string ); # decode $string as a PPI document and stream its comments tokens to FH
-
-=method C<parse_from_document>
-
-Lower level interface if you want to make C<PPI> Objects yourself.
-
-  ->parse_from_document( $ppi_document );
 
 =head1 SUPPORT
 

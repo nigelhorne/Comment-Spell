@@ -1,58 +1,69 @@
 ---
-after_failure:
-  - perl ./maint-travis-ci/report_fail_ctx.pl
-before_install:
-  - perlbrew list
-  - time git clone --depth 10 https://github.com/kentfredric/travis-scripts.git maint-travis-ci
-  - time git -C ./maint-travis-ci reset --hard master
-  - time perl ./maint-travis-ci/branch_reset.pl
-  - time perl ./maint-travis-ci/sterilize_env.pl
-before_script:
-  - time perl ./maint-travis-ci/before_script.pl
-branches:
-  only:
-    - master
-    - builds
-    - releases
-install:
-  - time perl ./maint-travis-ci/install_deps_early.pl
-  - time perl ./maint-travis-ci/autoinstall_dzil.pl
-  - time perl ./maint-travis-ci/install_deps_2.pl
 language: perl
-matrix:
-  allow_failures:
-    - perl: '5.8'
-    - env: STERILIZE_ENV=0 RELEASE_TESTING=1 AUTHOR_TESTING=1
-    - env: STERILIZE_ENV=0 DEVELOPER_DEPS=1
-  include:
-    - env: STERILIZE_ENV=0 COVERAGE_TESTING=1
-      perl: '5.21'
-    - env: STERILIZE_ENV=1
-      perl: '5.21'
-    - env: STERILIZE_ENV=0
-      perl: '5.8'
-    - env: STERILIZE_ENV=0
-      perl: '5.10'
-    - env: STERILIZE_ENV=0
-      perl: '5.12'
-    - env: STERILIZE_ENV=0
-      perl: '5.14'
-    - env: STERILIZE_ENV=0
-      perl: '5.16'
-    - env: STERILIZE_ENV=0
-      perl: '5.20'
-    - env: STERILIZE_ENV=0
-      perl: '5.21'
-    - env: STERILIZE_ENV=1
-      perl: '5.8'
-    - env: STERILIZE_ENV=1
-      perl: '5.10'
-    - env: STERILIZE_ENV=1
-      perl: '5.20'
-    - env: STERILIZE_ENV=0 DEVELOPER_DEPS=1
-      perl: '5.21'
-    - env: STERILIZE_ENV=0 RELEASE_TESTING=1 AUTHOR_TESTING=1
-      perl: '5.21'
-script:
-  - time perl ./maint-travis-ci/script.pl
+
+os:
+  - linux
+  # - osx
+
+arch:
+  - amd64
+  - ppc64le
+  - s390x
+  # - arm64	# Gets 404 error
+
+env: AUTOMATED_TESTING=1 PERL_CPANM_OPT="--notest --force --skip-satisfied"
+
+perl:
+  - "5.30"
+  - "5.28" # Travis gets 404 errors trying to find some older perls
+  - "5.26"
+  - "5.24"
+  # - "5.22"
+  # - "5.20"
+  # - "5.18"
+  # - "5.16"
+  # - "5.14"
+  # - "5.12"
+  # - "5.10"
+  # - "5.8"
+  # - "5.8.7"
+
 sudo: false
+
+# before_install:
+  # # - sudo apt-get update -q
+  # # - sudo apt-get install sqlite3 libdbi-perl libdbd-sqlite3-perl
+  # - cpanm -qin --skip-satisfied Devel::Cover::Report::Coveralls Test::Script Test::Pod::Spelling::CommonMistakes Test::Portability::Files Test::Taint Test::Carp Test::Pod::Coverage
+
+before_install:
+  - git clone git://github.com/travis-perl/helpers ~/travis-perl-helpers
+  - source ~/travis-perl-helpers/init --auto
+  - build-perl
+  - perl -V
+  - build-dist
+  - cd $BUILD_DIR
+  - cpanm -qin --skip-satisfied Devel::Cover::Report::Coveralls Test::Pod::Spelling::CommonMistakes Test::Portability::Files Test::Pod::Coverage
+
+install:
+  - cpanm -qin --skip-satisfied --installdeps --notest .
+
+script:
+  perl Makefile.PL && make && cover -test -report coveralls
+
+jobs:
+  include:
+    - stage: Windows
+      os: windows
+      language: shell
+      before_install:
+        - cinst -y strawberryperl
+        - export "PATH=/c/Strawberry/perl/site/bin:/c/Strawberry/perl/bin:/c/Strawberry/c/bin:$PATH"
+      install:
+        - cpanm --notest --installdeps .
+      script:
+        - perl Makefile.PL
+        - gmake
+        - gmake test
+
+after_failure:
+  - cat /home/travis/.cpanm/work/*/build.log
