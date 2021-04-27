@@ -1,0 +1,22 @@
+.mailmap
+.perltidyrc
+Changes
+dist.ini
+dist.ini.meta
+lib/Comment/Spell.pm
+LICENSE
+maint/perlcritic.rc.gen.pl
+Makefile.PL
+MANIFEST			This list of files
+MANIFEST.SKIP
+misc/Changes.deps
+misc/Changes.deps.all
+misc/Changes.deps.dev
+misc/Changes.deps.opt
+misc/perlcritic.deps
+perlcritic.rc
+README.mkdn
+t/basic.t
+t/output_file.t
+t/output_string.t
+weaver.ini
