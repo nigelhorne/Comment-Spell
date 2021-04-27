@@ -1,8 +1,8 @@
 .mailmap
 .perltidyrc
 Changes
-dist.ini
-dist.ini.meta
+dist.ini.keep
+dist.ini.meta.keep
 lib/Comment/Spell.pm
 LICENSE
 maint/perlcritic.rc.gen.pl
@@ -17,6 +17,10 @@ misc/perlcritic.deps
 perlcritic.rc
 README.mkdn
 t/basic.t
+t/links.t
+t/no404s.t
+t/noopentickets.t
+t/noplan.t
 t/output_file.t
 t/output_string.t
 weaver.ini

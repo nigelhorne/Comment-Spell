@@ -55,46 +55,46 @@ like those found in C<Perl::Critic>
 
   $speller->parse_from_file(q[Foo.pm]); # Now writes to $str
 
-=method C<new>
+=head2 C<new>
 
   ->new(
     stopwords         => A Pod::Wordlist instance
     output_filehandle => A IO Handle ( default is STDOUT )
   )
 
-=method C<output_filehandle>
+=head2 C<output_filehandle>
 
 The file handle to write to.
 
 See L</set_output_filehandle>, L</set_output_string> and L</set_output_file>
 
-=method C<set_output_filehandle>
+=head2 C<set_output_filehandle>
 
   ->set_output_filehandle( $fh );
   ->set_output_filehandle( \*STDOUT );
 
-=method C<set_output_string>
+=head2 C<set_output_string>
 
   my $str;
   ->set_output_string( $str ); # will write to $str
 
-=method C<set_output_file>
+=head2 C<set_output_file>
 
   ->set_output_file('./out.txt');
 
-=method C<parse_from_file>
+=head2 C<parse_from_file>
 
   ->parse_from_file('./in.pm'); # Read in.pm and stream tokens to current FH
 
-=method C<parse_from_filehandle>
+=head2 C<parse_from_filehandle>
 
   ->parse_from_filehandle( $fh ); # Slurps FH and streams its tokens to current FH
 
-=method C<parse_from_string>
+=head2 C<parse_from_string>
 
   ->parse_from_string( $string ); # decode $string as a PPI document and stream its comments tokens to FH
 
-=method C<parse_from_document>
+=head2 C<parse_from_document>
 
 Lower level interface if you want to make C<PPI> Objects yourself.
 
