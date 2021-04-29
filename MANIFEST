@@ -1,8 +1,6 @@
 .mailmap
 .perltidyrc
 Changes
-dist.ini.keep
-dist.ini.meta.keep
 lib/Comment/Spell.pm
 LICENSE
 maint/perlcritic.rc.gen.pl
@@ -15,6 +13,7 @@ misc/Changes.deps.dev
 misc/Changes.deps.opt
 misc/perlcritic.deps
 perlcritic.rc
+README.md
 README.mkdn
 t/basic.t
 t/links.t
