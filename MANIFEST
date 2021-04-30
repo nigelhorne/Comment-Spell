@@ -16,6 +16,7 @@ perlcritic.rc
 README.md
 README.mkdn
 t/basic.t
+t/eof.t
 t/links.t
 t/no404s.t
 t/noopentickets.t
