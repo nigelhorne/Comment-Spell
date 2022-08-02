@@ -1,5 +1,7 @@
 package Comment::Spell;
 
+# TODO: catch duplicate words in a comment
+
 use 5.006;
 use strict;
 use warnings;
