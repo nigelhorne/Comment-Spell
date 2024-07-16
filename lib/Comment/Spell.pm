@@ -290,10 +290,6 @@ L<http://cpants.cpanauthors.org/dist/Comment-Spell>
 
 L<http://matrix.cpantesters.org/?dist=Comment-Spell>
 
-=item * CPAN Ratings
-
-L<http://cpanratings.perl.org/d/Comment-Spell>
-
 =item * CPAN Testers Dependencies
 
 L<http://deps.cpantesters.org/?module=Comment::Spell>

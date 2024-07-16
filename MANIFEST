@@ -26,4 +26,5 @@ t/noopentickets.t
 t/noplan.t
 t/output_file.t
 t/output_string.t
+t/vars.t
 weaver.ini
