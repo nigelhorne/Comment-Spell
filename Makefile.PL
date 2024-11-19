@@ -2,6 +2,15 @@ use strict;
 use warnings;
 use ExtUtils::MakeMaker 6.64;	# 6.64 for TEST_REQUIRES
 
+my $dist = {
+	COMPRESS => 'gzip -9f',
+	SUFFIX => 'gz'
+};
+
+if($^O eq 'darwin') {
+	$dist->{'TAR'} = 'gtar';
+}
+
 WriteMakefile(
 	NAME		=> 'Comment::Spell',
 	AUTHOR		=> q{Nigel Horne <njh@bandsman.co.uk>},
@@ -16,8 +25,9 @@ WriteMakefile(
 	'INC' => '',     # e.g., '-I/usr/include/other'
 	PL_FILES	=> {},
 	TEST_REQUIRES => {
+		'Test::DescribeMe' => 0,
 		'Test::Most' => 0,
-		'Test::Needs' => 0,
+		'Test::Needs' => 0
 	}, PREREQ_PM => {
 		'Carp' => 0,
 		'Moo' => 0,
@@ -27,9 +37,7 @@ WriteMakefile(
 		'IO::Handle' => 0,
 		'IO::Scalar' => 0,
 		'Text::Wrap' => 0,
-	},
-	dist		=> { COMPRESS => 'gzip -9f', SUFFIX => 'gz', },
-	clean		=> { FILES => 'Comment-Spell-*' },
+	}, dist => $dist,
 	# META_ADD => {
 		# provides => {}
 	# },
