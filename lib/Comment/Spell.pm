@@ -150,9 +150,10 @@ sub set_output_file {
 
 # ->set_output_string( my $str );
 sub set_output_string {    ## no critic (Subroutines::RequireArgUnpacking)
-  my $fh = IO::Scalar->new( \$_[1] );
-  $_[0]->set_output_filehandle($fh);
-  return;
+	Carp::croak(ref($_[1])) if(ref($_[1]));	# IO::Scalar takes a ref to a scalar
+
+	my $fh = IO::Scalar->new( \$_[1] );
+	$_[0]->set_output_filehandle($fh);
 }
 
 # Returns a PPI Document for a filehandle
